@@ -1,6 +1,19 @@
 import { useState } from "react";
+import axios from "axios";
+import {useHistory, withRouter} from "react-router-dom";
+import {apiURL} from "../util/apiURL";
 
-function SongNewForm( {addNewSong}) {
+const API = apiURL()
+function SongNewForm() {
+  let history = useHistory()
+  const addSong = async(newSong) =>{
+    try {
+      await axios.post(`${API}/songs`, newSong)
+      history.push(`/songs`)
+    } catch (error) {
+      console.log(error)
+    }
+  }
   const [song, setSong] = useState({
     name: "",
     artist: "",
@@ -18,7 +31,7 @@ function SongNewForm( {addNewSong}) {
   };
 
  const handleSubmit = (e) => {
-     addNewSong(song)
+     addSong(song);
      e.preventDefault()
  }; 
   return (
@@ -44,4 +57,4 @@ function SongNewForm( {addNewSong}) {
     </div>
   );
 }
-export default SongNewForm;
+export default withRouter(SongNewForm);

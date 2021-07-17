@@ -3,22 +3,10 @@ import "./App.css";
 
 import Index from "./Pages/Index";
 import New from "./Pages/New";
-
+import SongNewForm from "./Components/SongNewForm";
 import NavBar from "./Components/NavBar";
-import { apiURL } from "./util/apiURL"
-
-const API = apiURL()
-
 
 function App() {
-  // const addNewSong = async () => {
-  //   let res;
-  //   try {
-  //     res await = axios.post(`${API}/songs`)
-  //   } catch (error) {
-      
-  //   }
-  // };
   return (
     <div className="App">
       <Router>
@@ -32,7 +20,7 @@ function App() {
               < Show/>
             </Route> */}
             <Route exact path="/songs/new">
-              <New />
+              <SongNewForm />
             </Route>
           </Switch>
         </main>
