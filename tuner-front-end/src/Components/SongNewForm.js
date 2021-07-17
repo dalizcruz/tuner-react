@@ -19,7 +19,6 @@ function SongNewForm() {
   const addSong = async(newSong) =>{
     try {
       let res = await axios.post(`${API}/songs`, newSong)
-      //setSong([...song, res.data])
       history.push(`/songs`)
 console.log(res.data)
       console.log(res.data)
@@ -39,7 +38,6 @@ console.log(res.data)
  const handleSubmit =  (e) => {
      e.preventDefault()
      addSong(song);
-     //history.push(`/songs`)
     }; 
   return (
     <div>
