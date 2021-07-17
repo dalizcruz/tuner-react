@@ -1,24 +1,14 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 
-import Index from "./Pages/Index";
-import New from "./Pages/New";
 
 import NavBar from "./Components/NavBar";
-import { apiURL } from "./util/apiURL"
+import SongList from "./Components/SongList";
+import New from "./Pages/New";
 
-const API = apiURL()
 
 
 function App() {
-  // const addNewSong = async () => {
-  //   let res;
-  //   try {
-  //     res await = axios.post(`${API}/songs`)
-  //   } catch (error) {
-      
-  //   }
-  // };
   return (
     <div className="App">
       <Router>
@@ -26,7 +16,7 @@ function App() {
         <main>
           <Switch>
             <Route exact path="/songs">
-              <Index />
+              <SongList />
             </Route>
             {/* <Route exact path="/songs/:id">
               < Show/>
