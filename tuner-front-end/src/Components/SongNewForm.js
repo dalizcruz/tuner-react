@@ -1,6 +1,13 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import {useHistory, withRouter} from "react-router-dom";
+import apiURL from "../util/apiURL";
 
-function SongNewForm( {addNewSong}) {
+const API = apiURL()
+
+function SongNewForm() {
+  let history = useHistory()
+
   const [song, setSong] = useState({
     name: "",
     artist: "",
@@ -8,6 +15,18 @@ function SongNewForm( {addNewSong}) {
     time: "",
     is_favorite: false,
   });
+
+  const addSong = async(newSong) =>{
+    try {
+      let res = await axios.post(`${API}/songs`, newSong)
+      //setSong([...song, res.data])
+      history.push(`/songs`)
+console.log(res.data)
+      console.log(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const handleTextInput = (event) => {
     setSong({ ...song, [event.target.id]: event.target.value });
@@ -17,31 +36,32 @@ function SongNewForm( {addNewSong}) {
     setSong({ ...song, [event.target.id]: !song.is_favorite });
   };
 
- const handleSubmit = (e) => {
-     addNewSong(song)
+ const handleSubmit =  (e) => {
      e.preventDefault()
- }; 
+     addSong(song);
+     //history.push(`/songs`)
+    }; 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <label>Song Name:</label>
-        <input type="text" onChange={handleTextInput} required />
+        <label htmlFor="name">Song Name:</label>
+        <input id="name" value={song.name} type="text" onChange={handleTextInput} required />
 
-        <label>Artist:</label>
-        <input type="text" onChange={handleTextInput} required />
+        <label htmlFor="artist">Artist:</label>
+        <input id="artist" type="text" onChange={handleTextInput} required />
 
-        <label>Album:</label>
-        <input type="text" onChange={handleTextInput} required />
+        <label htmlFor="album">Album:</label>
+        <input id="album" type="text" onChange={handleTextInput} required />
 
-        <label>Time:</label>
-        <input type="text" onChange={handleTextInput} required />
+        <label htmlFor="time">Time:</label>
+        <input id="time" type="text" onChange={handleTextInput} required />
 
-        <label>Favorite:</label>
-        <input type="checkbox" onChange={handleCheckBox} />
+        <label htmlFor="is_favorite">Favorite:</label>
+        <input id="is_favorite" type="checkbox" onChange={handleCheckBox} />
 
         <input type="submit" />
       </form>
     </div>
   );
 }
-export default SongNewForm;
+export default withRouter(SongNewForm);

@@ -1,12 +1,9 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 
-
-import NavBar from "./Components/NavBar";
 import SongList from "./Components/SongList";
-import New from "./Pages/New";
-
-
+import SongNewForm from "./Components/SongNewForm";
+import NavBar from "./Components/NavBar";
 
 function App() {
   return (
@@ -22,7 +19,7 @@ function App() {
               < Show/>
             </Route> */}
             <Route exact path="/songs/new">
-              <New />
+              <SongNewForm />
             </Route>
           </Switch>
         </main>
